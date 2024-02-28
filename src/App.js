@@ -8,12 +8,12 @@ import useTimeSpentOnPage from "./useTimeSpentOnPage";
 
 export function App(props) {
   // Use the useCopyDetection hook with the callback function
-  useCopyDetection(handleCopy);
+
   const handleCopy = (copiedText) => {
     console.log("Copied text:", copiedText);
     // Perform actions with the copied text
   };
-
+  useCopyDetection(handleCopy);
   // error hook
   useErrorTracking();
   // Simulate an error
