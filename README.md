@@ -10,8 +10,6 @@ This repository contains custom React hooks designed to enhance your application
     - [usePrintDetection](#useprintdetection)
     - [usePageViewTracking](#usepageviewtracking)
     - [useTimeSpentOnPage](#usetimespentonpage)
-4. [Examples](#examples)
-5. [License](#license)
 
 ## Introduction
 
@@ -45,3 +43,95 @@ const App = () => {
 
 ```
 
+### useErrorTracking
+
+This hook tracks errors that occur within your application and sends them to a designated error tracking service.
+
+```javascript
+import useErrorTracking from './useErrorTracking';
+
+const App = () => {
+   useErrorTracking();
+  // Simulate an error
+  const throwError = () => {
+    throw new Error("This is a test error");
+  };
+
+  return (
+         <div>
+        <h1>Error Tracking Test</h1>
+        <button onClick={throwError}>Throw Error</button>
+      </div>
+  );
+};
+
+```
+
+### usePrintDetection
+
+This hook detects when the user initiates a print action on the webpage.
+
+```javascript
+import { useState } from 'react';
+import usePrintDetection from './usePrintDetection';
+
+const App = () => {
+  const [isPrinting, setIsPrinting] = useState(false);
+  usePrintDetection(setIsPrinting);
+
+  return (
+        <div>
+        <h1>Print Detection Test</h1>
+        <p>Is Printing: {isPrinting ? "Yes" : "No"}</p>
+      </div>
+  );
+}
+
+```
+
+### usePageViewTracking
+
+This hook tracks the number of page views using session storage.
+
+```javascript
+import { useEffect, useState } from 'react';
+import usePageViewTracking from './usePageViewTracking';
+
+const App = () => {
+  const [pageViews, setPageViews] = useState(0);
+
+  useEffect(() => {
+    const pageViews = parseInt(sessionStorage.getItem("page_view_tracker_page_views"), 10) || 0;
+    setPageViews(pageViews);
+    console.log("Page Views:", pageViews);
+  }, []);
+
+  usePageViewTracking(); // Make sure to call usePageViewTracking after initializing the state
+
+  return (
+    // Your JSX components
+  );
+};
+
+```
+
+### useTimeSpentOnPage
+
+This hook measures the time spent by the user on the current page.
+
+```javascript
+import useTimeSpentOnPage from './useTimeSpentOnPage';
+
+const App = () => {
+  const timeSpent = useTimeSpentOnPage();
+
+  return (
+        <div>
+        <h1>Time Spent On Page Test</h1>
+        <p>Time Spent On Page: {timeSpent} seconds</p>
+      </div>
+  );
+};
+
+
+```
